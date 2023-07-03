@@ -11,21 +11,11 @@ def is_prime(number):
     return True
 
 
-def load_primes_from_file(filename):
-    with open(filename, 'r') as file:
-        prime_lines = file.readlines()
-    primes = [int(line.strip()) for line in prime_lines]
-    return primes
-
-
-def generate_key_pair(p, q):
-    n = p * q
-    phi_n = (p - 1) * (q - 1)
-    e = random.randint(3, phi_n - 1)
-    while math.gcd(e, phi_n) != 1:
-        e = random.randint(3, phi_n - 1)
-    d = mod_inverse(e, phi_n)
-    return (e, n), (d, n)
+def generate_prime(min_value, max_value):
+    prime = random.randint(min_value, max_value)
+    while not is_prime(prime):
+        prime = random.randint(min_value, max_value)
+    return prime
 
 
 def mod_inverse(e, phi):
@@ -45,6 +35,16 @@ def decrypt(encrypted_message, private_key):
     d, n = private_key
     decrypted_message = [chr(pow(char, d, n)) for char in encrypted_message]
     return "".join(decrypted_message)
+
+
+def generate_key_pair(p, q):
+    n = p * q
+    phi_n = (p - 1) * (q - 1)
+    e = random.randint(3, phi_n - 1)
+    while math.gcd(e, phi_n) != 1:
+        e = random.randint(3, phi_n - 1)
+    d = mod_inverse(e, phi_n)
+    return (e, n), (d, n)
 
 
 def save_key_to_file(key, filename):
@@ -79,9 +79,7 @@ def save_decrypted_message_to_file(decrypted_message, filename):
 
 
 def main():
-    primes = load_primes_from_file('primeList.txt')
-
-    p, q = primes[0], primes[1]
+    p, q = generate_prime(1000, 5000), generate_prime(1000, 5000)
 
     public_key, private_key = generate_key_pair(p, q)
 
@@ -99,7 +97,6 @@ def main():
     decrypted_message = decrypt(encrypted_message, private_key)
     print("Mensagem decriptada:", decrypted_message)
     save_decrypted_message_to_file(decrypted_message, 'decrypted_message.txt')
-
 
 if __name__ == '__main__':
     main()
