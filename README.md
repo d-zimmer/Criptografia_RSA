@@ -5,7 +5,7 @@ Avaliação N3 da disciplina de Segurança.
 Nomes: David Zimmermann Neto (Sozinho)
 
 
-Eu fiz o código de geração ramdômica de primos (tem uma versão no qual eu pegava da lista de primos que o professor passou) e fazia as verificações. Fiz as funções de cálculo do RSA e outras duas funções de encriptação e decriptação para as mensagens.
+Eu fiz o código de geração ramdômica de primos (tem uma versão no qual eu pegava da lista de primos que o professor passou) e fazia as verificações. Fiz as funções de cálculo do RSA e outras duas funções de encriptação e decriptação para as mensagens. Para utilização, deve gerar as chaves executando a função getKeys.py, depois seguir as instruções de uso de cada um dos programas Encripta e Decripta
 
 # Teste
 Utilizei o um comando input para testar o código com diferentes mensagens. Todo o código funciona.
